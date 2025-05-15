@@ -11,6 +11,14 @@
 require_once "Model.php";
 $model = new Model($db);
 $data = $model->getPeminjaman();
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $model->deletePeminjaman($id);
+    header("Location: peminjaman.php");
+    exit();
+}
+
+
 ?>
 
 <div class="m-3">
@@ -27,6 +35,7 @@ $data = $model->getPeminjaman();
         <th>Judul Buku</th>
         <th>Tanggal Pinjam</th>
         <th>Tanggal Kembali</th>
+        <th>Aksi</th>
     </tr>
     <?php $no = 1; foreach ($data as $row): ?>
     <tr>
@@ -35,6 +44,7 @@ $data = $model->getPeminjaman();
         <td><?= htmlspecialchars($row['judul_buku']) ?></td>
         <td><?= htmlspecialchars($row['tgl_pinjam']) ?></td>
         <td><?= htmlspecialchars($row['tgl_kembali']) ?></td>
+        <td><a href="?delete=<?= $row['id_peminjaman']; ?>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin?')">Delete</a></td>
     </tr>
     <?php endforeach; ?>
 </table>

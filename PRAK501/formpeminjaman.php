@@ -18,7 +18,6 @@
             $id_buku = $_POST['id_buku'];
         
             $model->insertPeminjaman($tanggal_pinjam, $tanggal_kembali, $id_member, $id_buku);
-            echo "<script>alert('Peminjaman berhasil ditambahkan!'); window.location='Peminjaman.php';</script>";
         }
     ?>
     <h2 class="m-3">Form Tambah Peminjaman</h2>

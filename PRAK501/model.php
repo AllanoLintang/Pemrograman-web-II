@@ -18,12 +18,6 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
-        public function getMembersByName($nama){
-            $stmt = $this->db->prepare("SELECT * FROM member WHERE nama_member LIKE ?");
-            $stmt->execute(['%' . $nama . '%']);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-
         public function insertMember($nama, $nomor, $alamat, $tgl_daftar, $tgl_terakhir_bayar){
             $stmt = $this->db->prepare("INSERT INTO member (nama_member, nomor_member, alamat, tgl_mendaftar, tgl_terakhir_bayar) VALUES (?, ?, ?, ?, ?)");
             return $stmt->execute([$nama, $nomor, $alamat, $tgl_daftar, $tgl_terakhir_bayar]);
@@ -48,12 +42,6 @@
             $stmt = $this->db->prepare("SELECT * FROM buku WHERE id_buku = ?");
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-
-        public function getBooksByTitle($judul){
-            $stmt = $this->db->prepare("SELECT * FROM buku WHERE judul_buku LIKE ?");
-            $stmt->execute(['%' . $judul . '%']);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function insertBook($judul, $penulis, $penerbit, $tahun_terbit){
